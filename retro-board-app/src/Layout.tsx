@@ -19,6 +19,7 @@ import TermsAndConditionsPage from './views/policies/Terms';
 import CookiesPolicyPage from './views/policies/Cookies';
 import AcceptableUsePolicyPage from './views/policies/AcceptableUse';
 import DisclaimerPage from './views/policies/Disclaimer';
+import Footer from './views/Footer';
 
 const Title = styled(Typography)`
   flex-grow: 1;
@@ -72,6 +73,7 @@ function App() {
       </Switch>
       <Panel />
       <OutdatedBrowser show={!isCompatible} />
+      <Footer />
     </div>
   );
 }
