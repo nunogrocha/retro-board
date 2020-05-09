@@ -67,9 +67,6 @@ const Content = styled.div`
 `;
 
 const Policies = styled.div`
-  //position: fixed;
-  //left: 0;
-  //bottom: 0;
   border-top: 1px solid grey;
   display: flex;
   flex-direction: column;
