@@ -71,4 +71,5 @@ export interface Configuration {
   GOOGLE_SECRET: string;
   GITHUB_KEY: string;
   GITHUB_SECRET: string;
+  BCRYPT_SALT: string;
 }

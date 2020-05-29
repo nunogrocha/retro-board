@@ -32,6 +32,7 @@ const config: Configuration = {
   GOOGLE_SECRET: process.env.GOOGLE_SECRET!,
   GITHUB_KEY: process.env.GITHUB_KEY!,
   GITHUB_SECRET: process.env.GITHUB_SECRET!,
+  BCRYPT_SALT: process.env.BCRYPT_SALT!,
 };
 
 export default config;

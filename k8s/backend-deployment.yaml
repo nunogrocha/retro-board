@@ -67,6 +67,11 @@ spec:
                 secretKeyRef:
                   name: retrospected-secrets
                   key: SESSION_SECRET
+            - name: BCRYPT_SALT
+              valueFrom:
+                secretKeyRef:
+                  name: retrospected-secrets
+                  key: BCRYPT_SALT
             - name: TWITTER_KEY
               value: ''
             - name: TWITTER_SECRET

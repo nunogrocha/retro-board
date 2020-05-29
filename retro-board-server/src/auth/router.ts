@@ -7,7 +7,6 @@ const twitterAuth = passport.authenticate('twitter');
 const googleAuth = passport.authenticate('google', {
   scope: ['profile', 'email'],
 });
-const facebookAuth = passport.authenticate('facebook');
 const githubAuth = passport.authenticate('github');
 const anonAuth = passport.authenticate('local');
 
@@ -42,7 +41,6 @@ router.use((req, _, next) => {
 // Routes that are triggered on the client
 router.get('/twitter', twitterAuth);
 router.get('/google', googleAuth);
-router.get('/facebook', facebookAuth);
 router.get('/github', githubAuth);
 
 export default router;

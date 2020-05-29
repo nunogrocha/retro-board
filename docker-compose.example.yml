@@ -68,6 +68,7 @@ services:
       GITHUB_KEY:
       GITHUB_SECRET:
       BASE_URL: http://localhost:80 # This must be the URL of the frontend app once deployed
+      BCRYPT_SALT: changeme
     restart: unless-stopped
     logging:
       driver: 'json-file'

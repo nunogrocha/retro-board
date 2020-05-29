@@ -62,7 +62,7 @@ export default (store: Store) => {
       { passwordField: 'password', usernameField: 'username' },
       async (
         username: string,
-        _password: string,
+        password: string,
         done: (error: any, user?: any, options?: IVerifyOptions) => void
       ) => {
         const user: User = {

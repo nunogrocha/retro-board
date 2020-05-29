@@ -29,8 +29,6 @@ setupSentryRequestHandler(app);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// saveUninitialized: true allows us to attach the socket id to the session
-// before we have athenticated the user
 let sessionMiddleware: express.RequestHandler;
 
 if (config.REDIS_ENABLED) {

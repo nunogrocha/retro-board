@@ -21,7 +21,8 @@ kubectl create secret generic retrospected-secrets \
 --from-literal=SESSION_SECRET=secret \
 --from-literal=TWITTER_SECRET= \
 --from-literal=GOOGLE_SECRET= \
---from-literal=GITHUB_SECRET=
+--from-literal=GITHUB_SECRET=changeme
+--from-literal=BCRYPT_SALT=changeme
 ```
 
 You can (and you should) of course change these values to more secure passwords.

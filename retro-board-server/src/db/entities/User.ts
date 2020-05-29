@@ -9,6 +9,8 @@ import {
 } from 'typeorm';
 import { AccountType } from 'retro-board-common';
 import { SessionTemplate } from '.';
+import bcrypt from 'bcrypt';
+import config from '../config';
 
 @Entity({ name: 'users' })
 @Index(['username', 'accountType'], { unique: true })
@@ -22,6 +24,8 @@ export default class User {
   public accountType: AccountType;
   @Column({ nullable: true, type: 'character varying' })
   public username: string | null;
+  @Column({ nullable: true, type: 'character varying' })
+  public password: string | null;
   @Column({ nullable: true, type: 'character varying' })
   public photo: string | null;
   @Column({ nullable: false, type: 'character varying', default: 'en' })
@@ -37,7 +41,21 @@ export default class User {
     this.name = name;
     this.language = 'en';
     this.accountType = 'anonymous';
+    this.password = null;
     this.username = null;
     this.photo = null;
+  }
+
+  public async setPassword(password: string): Promise<void> {
+    const hashed = await bcrypt.hash(password, config.BCRYPT_SALT);
+    this.password = hashed;
+  }
+
+  public async checkPassword(password: string): Promise<boolean> {
+    if (!this.password) {
+      return false;
+    }
+    const result = await bcrypt.compare(password, this.password);
+    return result;
   }
 }
