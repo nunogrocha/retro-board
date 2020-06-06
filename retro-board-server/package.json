@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@sentry/node": "^5.16.1",
-    "@types/connect-redis": "0.0.13",
+    "@types/connect-redis": "0.0.14",
     "@types/dotenv": "^8.2.0",
     "@types/express": "4.17.3",
     "@types/express-session": "1.17.0",
@@ -27,7 +27,7 @@
     "@types/redis": "2.8.18",
     "@types/shortid": "^0.0.29",
     "@types/socket.io": "^2.1.8",
-    "@types/socket.io-redis": "1.0.25",
+    "@types/socket.io-redis": "1.0.26",
     "@types/uuid": "^8.0.0",
     "body-parser": "^1.19.0",
     "chalk": "^4.0.0",

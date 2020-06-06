@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import socketIo from 'socket.io';
 import socketIoRedisAdapter from 'socket.io-redis';
-import redis from 'redis';
+import redis, { RedisClient } from 'redis';
 import connectRedis from 'connect-redis';
 import http from 'http';
 import chalk from 'chalk';
