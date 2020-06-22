@@ -147,6 +147,7 @@ const Column: SFC<ColumnProps> = ({
                     giphy,
                   })
                 }
+                allowDownVotes={options.allowDownVotes}
               />
             ))}
           </Group>
@@ -190,6 +191,7 @@ const Column: SFC<ColumnProps> = ({
                     giphy,
                   })
                 }
+                allowDownVotes={options.allowDownVotes}
               />
             ))}
           </PostsWrapper>

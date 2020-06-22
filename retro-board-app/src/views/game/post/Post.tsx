@@ -45,6 +45,7 @@ interface PostItemProps {
   onEditAction: (action: string) => void;
   onEditGiphy: (giphyId: string | null) => void;
   onDelete: () => void;
+  allowDownVotes: boolean;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -69,6 +70,7 @@ const PostItem = ({
   onEditAction,
   onEditGiphy,
   onDelete,
+  allowDownVotes
 }: PostItemProps) => {
   const {
     canCreateAction,
@@ -78,7 +80,7 @@ const PostItem = ({
     canDownVote,
     canShowAuthor,
     canReorder,
-    canUseGiphy,
+    canUseGiphy
   } = useUserPermissions(post);
   const classes = useStyles();
   const { Actions: translations, Post: postTranslations } = useTranslations();
@@ -228,15 +230,17 @@ const PostItem = ({
                 showTooltip={canShowAuthor}
                 ariaLabel="Like"
               />
-              <VoteButton
-                voters={downVoters}
-                canVote={canDownVote}
-                count={downVotes}
-                icon={<ThumbDownOutlined style={{ color: Palette.negative }} />}
-                onClick={onDislike}
-                showTooltip={canShowAuthor}
-                ariaLabel="Dislike"
-              />
+              {allowDownVotes ? 
+                <VoteButton
+                  voters={downVoters}
+                  canVote={canDownVote}
+                  count={downVotes}
+                  icon={<ThumbDownOutlined style={{ color: Palette.negative }} />}
+                  onClick={onDislike}
+                  showTooltip={canShowAuthor}
+                  ariaLabel="Dislike"
+                /> :
+                null}
               {giphyImageUrl && (
                 <ActionButton
                   ariaLabel={postTranslations.toggleGiphyButton!}

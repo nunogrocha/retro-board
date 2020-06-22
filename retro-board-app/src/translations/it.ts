@@ -86,6 +86,8 @@ export default {
     numberOfColumns: 'Numbero di colonne',
     numberOfColumnsHelp: 'Imposta il numero di colonne',
     makeDefaultTemplate: undefined,
+    allowDownVotes: undefined,
+    allowDownVotesHelp: undefined
   },
   PostBoard: {
     customQuestion: 'Colonna personalizzata',

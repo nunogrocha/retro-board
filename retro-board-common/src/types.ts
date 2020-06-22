@@ -37,6 +37,7 @@ export interface SessionOptions {
   maxUpVotes: number | null;
   maxDownVotes: number | null;
   allowActions: boolean;
+  allowDownVotes: boolean;
   allowSelfVoting: boolean;
   allowMultipleVotes: boolean;
   allowAuthorVisible: boolean;

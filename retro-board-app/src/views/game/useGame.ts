@@ -227,7 +227,7 @@ const useGame = (sessionId: string) => {
           column: columnIndex,
           user: user!,
           group: null,
-          rank,
+          rank
         };
 
         receivePost(post);

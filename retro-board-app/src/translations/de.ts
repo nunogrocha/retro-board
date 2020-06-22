@@ -84,6 +84,8 @@ export default {
     numberOfColumns: 'Anzahl an Spalten',
     numberOfColumnsHelp: 'Setze die Anzahl an Spalten',
     makeDefaultTemplate: undefined,
+    allowDownVotes: undefined,
+    allowDownVotesHelp: undefined
   },
   PostBoard: {
     customQuestion: 'Eigene Spalte',

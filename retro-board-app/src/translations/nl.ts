@@ -79,6 +79,8 @@ export default {
     numberOfColumns: undefined,
     numberOfColumnsHelp: undefined,
     makeDefaultTemplate: undefined,
+    allowDownVotes: undefined,
+    allowDownVotesHelp: undefined
   },
   PostBoard: {
     customQuestion: undefined,

@@ -85,6 +85,8 @@ export default {
     numberOfColumns: 'Number of columns',
     numberOfColumnsHelp: 'Set the number of columns',
     makeDefaultTemplate: 'Make this my default template',
+    allowDownVotes: 'Allow Down Votes',
+    allowDownVotesHelp: 'To allow users to down vote on a card'
   },
   PostBoard: {
     customQuestion: 'Custom Column',

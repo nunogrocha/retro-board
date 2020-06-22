@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import MaxVoteSlider from './components/MaxVoteSlider';
-import Slider from './components/Slider';
+import Slider from './components/Slider'; 
 import BooleanOption from './components/BooleanOption';
 import { SessionOptions, ColumnDefinition } from 'retro-board-common';
 import OptionItem from './components/OptionItem';
@@ -43,6 +43,7 @@ const CreateSessionModal = ({
   const [maxUpVotes, setMaxUpVotes] = useState<number | null>(null);
   const [maxDownVotes, setMaxDownVotes] = useState<number | null>(null);
   const [allowActions, setAllowActions] = useState<boolean>(true);
+  const [allowDownVotes, setAllowDownVotes] = useState<boolean>(false);
   const [allowSelfVoting, setAllowSelfVoting] = useState<boolean>(false);
   const [allowMultipleVotes, setAllowMultipleVotes] = useState<boolean>(false);
   const [allowAuthorVisible, setAllowAuthorVisible] = useState<boolean>(false);
@@ -94,6 +95,7 @@ const CreateSessionModal = ({
         allowReordering,
         maxDownVotes,
         maxUpVotes,
+        allowDownVotes
       },
       merge(definitions, defaultDefinitions, numberOfColumns),
       isDefaultTemplate
@@ -107,6 +109,7 @@ const CreateSessionModal = ({
     allowGiphy,
     allowGrouping,
     allowReordering,
+    allowDownVotes,
     maxDownVotes,
     maxUpVotes,
     definitions,
@@ -172,6 +175,15 @@ const CreateSessionModal = ({
             help={Customize.maxDownVotesHelp!}
           >
             <MaxVoteSlider value={maxDownVotes} onChange={setMaxDownVotes} />
+          </OptionItem>
+          <OptionItem
+            label={Customize.allowDownVotes!}
+            help={Customize.allowDownVotesHelp!}
+          >
+            <BooleanOption
+              value={allowDownVotes}
+              onChange={setAllowDownVotes}
+            />
           </OptionItem>
           <OptionItem
             label={Customize.allowSelfVoting!}
