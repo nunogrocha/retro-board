@@ -6,7 +6,7 @@ import {
   DroppableProvided,
   DroppableStateSnapshot,
 } from 'react-beautiful-dnd';
-import { colors, IconButton } from '@material-ui/core';
+import { colors, IconButton, Paper } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 import EditableLabel from '../../components/EditableLabel';
 import { Alert, AlertTitle } from '@material-ui/lab';
@@ -34,6 +34,7 @@ const Group: React.FC<GroupProps> = ({
         dropSnapshot: DroppableStateSnapshot
       ) => (
         <GroupContainer
+          variant="outlined"
           ref={dropProvided.innerRef}
           {...dropProvided.droppableProps}
           draggingOver={dropSnapshot.isDraggingOver}
@@ -69,15 +70,15 @@ const Group: React.FC<GroupProps> = ({
   );
 };
 
-const GroupContainer = styled.div<{ draggingOver: boolean }>`
+// const GroupContainer = styled.div<{ draggingOver: boolean }>`
+const GroupContainer = styled(Paper)<{ draggingOver: boolean }>`
   position: relative;
   display: flex;
   flex-direction: column;
-  border: 1px dashed lightgray;
-  border-radius: 10px;
-  margin: 10px 0;
-  background-color: ${(props) =>
-    props.draggingOver ? colors.grey[200] : 'unset'};
+  // border: 1px dashed lightgray;
+  // border-radius: 10px;
+  margin-top: 10px;
+  // background-color: ${(props) => props.draggingOver ? colors.blue[200] : 'background-color: rgba(255,255,255,0.7)'};
 `;
 
 const Header = styled.div`
@@ -91,10 +92,11 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100px;
+  padding: 0 10px 10px 10px;
 `;
 
 const Label = styled.div`
-  margin-left: 30px;
+  margin-left: 5px;
   flex: 1;
 `;
 

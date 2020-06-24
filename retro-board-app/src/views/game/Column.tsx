@@ -6,8 +6,15 @@ import {
   makeStyles,
   IconButton,
   Tooltip,
+  Card,
+  CardContent,
+  CardActions,
+  Button,
+  FormControl,
+  InputLabel,
+  Typography,
 } from '@material-ui/core';
-import { CreateNewFolder } from '@material-ui/icons';
+import { CreateNewFolder, Visibility, VisibilityOff } from '@material-ui/icons';
 import PostItem from './post/Post';
 import { Post, PostGroup, SessionOptions } from 'retro-board-common';
 import useUser from '../../auth/useUser';
@@ -19,6 +26,7 @@ import {
   DroppableStateSnapshot,
 } from 'react-beautiful-dnd';
 import { ColumnContent } from './types';
+import { values } from 'lodash';
 
 interface ColumnProps {
   column: ColumnContent;
@@ -81,31 +89,41 @@ const Column: SFC<ColumnProps> = ({
   );
   return (
     <ColumnWrapper>
-      <Add>
-        <Input
-          placeholder={question}
-          onChange={onContentChange}
-          value={content}
-          onKeyDown={onKeyDown}
-          readOnly={!isLoggedIn}
-          startAdornment={
-            Icon ? (
-              <InputAdornment position="start">
-                <Icon className={classes.icon} />
-              </InputAdornment>
-            ) : null
-          }
-        />
-        {options.allowGrouping && isLoggedIn ? (
-          <AddGroup>
-            <Tooltip title={columnTranslations.createGroupTooltip!}>
-              <IconButton onClick={onAddGroup} tabIndex={-1}>
-                <CreateNewFolder />
-              </IconButton>
-            </Tooltip>
-          </AddGroup>
-        ) : null}
-      </Add>
+      <CenterText>
+        <Typography variant="overline" gutterBottom>
+          {question}
+        </Typography>
+      </CenterText>
+      <Card>
+        <CardContent>
+          <Add>
+            <FormControl>
+              <InputLabel htmlFor="component-simple">{question}</InputLabel>
+              <Input
+                placeholder='Press ENTER to submit'
+                onChange={onContentChange}
+                value={content}
+                onKeyDown={onKeyDown}
+                readOnly={!isLoggedIn}
+              />
+            </FormControl>
+          </Add>
+        </CardContent>
+        <CardActions>
+          <AddGroupCentered>
+            {options.allowGrouping && isLoggedIn ? (
+              <Button
+              color="primary"
+              onClick={onAddGroup}
+              tabIndex={-1}
+              startIcon={<CreateNewFolder />}>
+                {columnTranslations.createGroupTooltip!}
+              </Button>
+            ) : null}
+          </AddGroupCentered>
+        </CardActions>
+      </Card>
+      
       <Groups>
         {groups.map((group) => (
           <Group
@@ -201,6 +219,44 @@ const Column: SFC<ColumnProps> = ({
   );
 };
 
+
+// const InnerList = React.memo(({posts}) => {
+//   return posts.map((post, index) => (<p>{post.id}</p>))
+// })
+
+// const InnerList = React.memo(function InnerList(props: students: Person[]) {
+//   return posts.map((post, index) => (
+//     <PostItem
+//       index={index}
+//       key={post.id}
+//       post={post}
+//       color={color}
+//       onLike={() => onLike(post)}
+//       onDislike={() => onDislike(post)}
+//       onDelete={() => onDelete(post)}
+//       onEdit={(content) =>
+//         onEdit({
+//           ...post,
+//           content,
+//         })
+//       }
+//       onEditAction={(action) =>
+//         onEdit({
+//           ...post,
+//           action,
+//         })
+//       }
+//       onEditGiphy={(giphy) =>
+//         onEdit({
+//           ...post,
+//           giphy,
+//         })
+//       }
+//       allowDownVotes={options.allowDownVotes}
+//     />
+//   ))
+// });
+
 const ColumnWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -232,6 +288,15 @@ const Add = styled.div`
       width: 100%;
     }
   }
+`;
+
+const AddGroupCentered = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const CenterText = styled.div`
+  text-align: center;
 `;
 
 const AddGroup = styled.div`

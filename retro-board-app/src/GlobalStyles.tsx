@@ -9,12 +9,12 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    background-color: white;
+    background-color: #eceff1;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   }
 
   #content {
-    background-color: white;
+    background-color: #eceff1;
   }
 
   button:focus,

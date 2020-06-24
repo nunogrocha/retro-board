@@ -7,6 +7,7 @@ import {
   Card,
   CardContent,
   colors,
+  CardActions,
 } from '@material-ui/core';
 import {
   ThumbUpOutlined,
@@ -117,14 +118,9 @@ const PostItem = ({
         isDragDisabled={!canReorder}
       >
         {(provided: DraggableProvided) => (
-          <PostCard ref={provided.innerRef} {...provided.draggableProps}>
-            {canReorder ? (
-              <DragHandle {...provided.dragHandleProps}>
-                <DragIndicator />
-              </DragHandle>
-            ) : null}
+          <PostCard variant="outlined" ref={provided.innerRef} {...provided.dragHandleProps} {...provided.draggableProps}>
             <CardContent>
-              <Typography variant="body1">
+              <Typography variant="body2">
                 <EditableLabel
                   readOnly={!canEdit}
                   value={post.content}
@@ -133,24 +129,7 @@ const PostItem = ({
                   multiline
                 />
               </Typography>
-              {canShowAuthor && (
-                <AuthorContainer>
-                  <Typography
-                    variant="caption"
-                    color="textSecondary"
-                    component="div"
-                  >
-                    {postTranslations.by}&nbsp;
-                  </Typography>
-                  <Typography
-                    variant="caption"
-                    color="textPrimary"
-                    component="div"
-                  >
-                    {post.user.name}
-                  </Typography>
-                </AuthorContainer>
-              )}
+              
               {giphyImageUrl && showGiphyImage && (
                 <GiphyContainer>
                   <CloseButtonContainer>
@@ -160,10 +139,11 @@ const PostItem = ({
                 </GiphyContainer>
               )}
             </CardContent>
+
             {displayAction && canCreateAction && (
               <CardContent className={classes.actionContainer}>
                 <Typography variant="caption">{translations.title}:</Typography>
-                <Typography variant="body1">
+                <Typography variant="body2">
                   <EditableLabel
                     value={post.action || ''}
                     onChange={onEditAction}
@@ -174,90 +154,103 @@ const PostItem = ({
                 </Typography>
               </CardContent>
             )}
-            <ActionsBar
-              color={color}
-              displayExtra={
-                canDelete ||
-                canCreateAction ||
-                (canEdit && config.hasGiphy && canUseGiphy)
-              }
-              extraActions={
-                <>
-                  {canDelete && (
-                    <ActionButton
-                      ariaLabel={postTranslations.deleteButton!}
-                      tooltip={postTranslations.deleteButton!}
-                      icon={
-                        <DeleteForeverOutlined
-                          style={{ color: Palette.negative }}
-                        />
-                      }
-                      onClick={onDelete}
-                    />
-                  )}
-                  {canCreateAction && (
-                    <ActionButton
-                      ariaLabel={postTranslations.setActionButton!}
-                      tooltip={postTranslations.setActionButton!}
-                      icon={
-                        post.action ? (
-                          <Feedback className={classes.actionIcon} />
-                        ) : (
-                          <FeedbackOutlined className={classes.actionIcon} />
-                        )
-                      }
-                      onClick={toggleAction}
-                    />
-                  )}
-                  {canEdit && config.hasGiphy && canUseGiphy && (
-                    <ActionButton
-                      ariaLabel={postTranslations.setGiphyButton!}
-                      tooltip={postTranslations.setGiphyButton!}
-                      icon={<EmojiEmotions className={classes.ghipyIcon} />}
-                      innerRef={postElement}
-                      onClick={handleShowGiphy}
-                    />
-                  )}
-                </>
-              }
-            >
-              <VoteButton
-                voters={upVoters}
-                canVote={canUpVote}
-                count={upVotes}
-                icon={<ThumbUpOutlined style={{ color: Palette.positive }} />}
-                onClick={onLike}
-                showTooltip={canShowAuthor}
-                ariaLabel="Like"
-              />
-              {allowDownVotes ? 
+
+            <ActionBar>
+              <ActionBarItems>
                 <VoteButton
-                  voters={downVoters}
-                  canVote={canDownVote}
-                  count={downVotes}
-                  icon={<ThumbDownOutlined style={{ color: Palette.negative }} />}
-                  onClick={onDislike}
+                  voters={upVoters}
+                  canVote={canUpVote}
+                  count={upVotes}
+                  icon={<ThumbUpOutlined style={{ color: Palette.positive }} />}
+                  onClick={onLike}
                   showTooltip={canShowAuthor}
-                  ariaLabel="Dislike"
-                /> :
-                null}
-              {giphyImageUrl && (
-                <ActionButton
-                  ariaLabel={postTranslations.toggleGiphyButton!}
-                  tooltip={postTranslations.toggleGiphyButton!}
-                  icon={
-                    <InsertPhotoTwoTone
-                      style={{
-                        color: !showGiphyImage
-                          ? colors.green[200]
-                          : colors.red[200],
-                      }}
-                    />
-                  }
-                  onClick={toggleShowGiphyImage}
+                  ariaLabel="Like"
                 />
-              )}
-            </ActionsBar>
+                {allowDownVotes ? 
+                  <VoteButton
+                    voters={downVoters}
+                    canVote={canDownVote}
+                    count={downVotes}
+                    icon={<ThumbDownOutlined style={{ color: Palette.negative }} />}
+                    onClick={onDislike}
+                    showTooltip={canShowAuthor}
+                    ariaLabel="Dislike"
+                  /> :
+                  null}
+                {giphyImageUrl && (
+                  <ActionButton
+                    ariaLabel={postTranslations.toggleGiphyButton!}
+                    tooltip={postTranslations.toggleGiphyButton!}
+                    icon={
+                      <InsertPhotoTwoTone
+                        style={{
+                          color: !showGiphyImage
+                            ? colors.green[200]
+                            : colors.red[200],
+                        }}
+                      />
+                    }
+                    onClick={toggleShowGiphyImage}
+                  />
+                )}
+
+                {canCreateAction && (
+                  <ActionButton
+                    ariaLabel={postTranslations.setActionButton!}
+                    tooltip={postTranslations.setActionButton!}
+                    icon={
+                      post.action ? (
+                        <Feedback className={classes.actionIcon} />
+                      ) : (
+                        <FeedbackOutlined className={classes.actionIcon} />
+                      )
+                    }
+                    onClick={toggleAction}
+                  />
+                )}
+                {canEdit && config.hasGiphy && canUseGiphy && (
+                  <ActionButton
+                    ariaLabel={postTranslations.setGiphyButton!}
+                    tooltip={postTranslations.setGiphyButton!}
+                    icon={<EmojiEmotions className={classes.ghipyIcon} />}
+                    innerRef={postElement}
+                    onClick={handleShowGiphy}
+                  />
+                )}
+                {canDelete && (
+                  <ActionButton
+                    ariaLabel={postTranslations.deleteButton!}
+                    tooltip={postTranslations.deleteButton!}
+                    icon={
+                      <DeleteForeverOutlined
+                        style={{ color: Palette.negative }}
+                      />
+                    }
+                    onClick={onDelete}
+                  />
+                )}
+              </ActionBarItems>
+              <ActionBarItemsAuthor>
+                {canShowAuthor && (
+                  <AuthorContainer>
+                    <Typography
+                      variant="caption"
+                      color="textSecondary"
+                      component="div"
+                    >
+                      {postTranslations.by}&nbsp;
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      color="textPrimary"
+                      component="div"
+                    >
+                      {post.user.name}
+                    </Typography>
+                  </AuthorContainer>
+                )}
+              </ActionBarItemsAuthor>
+            </ActionBar>
           </PostCard>
         )}
       </Draggable>
@@ -288,6 +281,19 @@ const PostItem = ({
   );
 };
 
+const ActionBar = styled(CardActions)`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const ActionBarItems = styled.div`
+
+`;
+
+const ActionBarItemsAuthor = styled(ActionBarItems)`
+  margin-right: 10px;
+`;
+
 const DragHandle = styled.div`
   cursor: move;
   position: absolute;
@@ -298,8 +304,7 @@ const DragHandle = styled.div`
 `;
 
 const PostCard = styled(Card)`
-  margin: 10px 5px;
-  margin-bottom: 20px;
+  margin-top: 10px;
   position: relative;
 
   :hover {
